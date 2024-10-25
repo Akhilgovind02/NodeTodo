@@ -56,9 +56,7 @@ const server = http.createServer((req, res) => {
   }
 
 
-  else if(path=='/update_todo_page'){
-    console.log("getting");
-    
+  else if(path=='/update_todo_page'){    
     res.writeHead(200,{'Content-Type':'text/html'})
     fs.readFile('editTodo.html',(err,data) => {
       if(err){
@@ -67,6 +65,14 @@ const server = http.createServer((req, res) => {
       }
       res.end(data)
     })
+  }
+
+  else if('get_todo_by_id'){
+    console.log(query)
+    Todo.findById(query.id).then((todo) => {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(todo))
+      })
   }
 
 

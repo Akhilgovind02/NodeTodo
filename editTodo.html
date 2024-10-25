@@ -7,8 +7,26 @@
 </head>
 <body>
     <form action="">
-        <input type="text">
+        <input id="input"  type="text">
         <button>Edit</button>
     </form>
+
+
+
+    <script>
+        const input = document.getElementById('input');
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        console.log('ID:', id);
+
+
+        async function getTodoById(){
+            let data = await fetch(`http://localhost:3500/get_todo_by_id?id=${id}`)
+            let todoById = await data.json()
+            input.value=todoById.task
+            console.log(todoById)
+        }
+        getTodoById()
+    </script>
 </body>
 </html>

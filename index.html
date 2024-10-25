@@ -27,7 +27,7 @@
 
         const editTodo = async(id) =>{
             console.log(id)
-            await fetch(`http://localhost:3500/update_todo_page?id=${id}`)
+
         }
 
         const getTodo = async( )=>{
@@ -38,7 +38,7 @@
                 return `
                 <li>${todo.task}</li>
                 <button onclick="deleteTodo(${todo._id})">DELETE</button>
-                <button onclick="editTodo(${todo._id})">Edit</button>
+                <button ><a href="http://localhost:3500/update_todo_page?id=${todo._id}">Edit</a></button>
                 `
             })
             document.getElementById('list').innerHTML = list.join('')
