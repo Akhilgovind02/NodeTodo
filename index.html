@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Todo</h1>
+    <center>
+        <form id="form-todo" action="">
+            <input id="input" type="text">
+            <button type="submit">ADD</button>
+        </form>
+    </center>
+
+
+    <script>
+        let input = document.getElementById('input')
+        let form = document.getElementById('form-todo')
+
+
+        const getTodo = async( )=>{
+            let data = await fetch('http://localhost:3500/get-todo')
+            let todos = await data.json()
+            console.log(todos);
+            
+        }
+
+        getTodo()
+
+        const AddTodo =async() => {
+            let text = input.value.trim()
+            if (text) {
+                let response = await fetch(`http://localhost:3500/add-todo?todo=${text}`)
+        }
+        }
+        form.addEventListener('submit',AddTodo);
+    </script>
+</body>
+</html>
