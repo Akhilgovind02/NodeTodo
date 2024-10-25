@@ -56,6 +56,20 @@ const server = http.createServer((req, res) => {
   }
 
 
+  else if(path=='/update_todo_page'){
+    console.log("getting");
+    
+    res.writeHead(200,{'Content-Type':'text/html'})
+    fs.readFile('editTodo.html',(err,data) => {
+      if(err){
+        res.writeHead(404)
+        res.end('Not Found')
+      }
+      res.end(data)
+    })
+  }
+
+
 });
 
 server.listen(3500, () => {

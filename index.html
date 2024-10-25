@@ -12,6 +12,10 @@
             <input id="input" type="text">
             <button type="submit">ADD</button>
         </form>
+
+        <ul id="list">
+
+        </ul>
     </center>
 
 
@@ -20,10 +24,25 @@
         let form = document.getElementById('form-todo')
 
 
+
+        const editTodo = async(id) =>{
+            console.log(id)
+            await fetch(`http://localhost:3500/update_todo_page?id=${id}`)
+        }
+
         const getTodo = async( )=>{
             let data = await fetch('http://localhost:3500/get-todo')
             let todos = await data.json()
-            console.log(todos);
+            console.log(todos)
+            const list = todos.map((todo) => {
+                return `
+                <li>${todo.task}</li>
+                <button onclick="deleteTodo(${todo._id})">DELETE</button>
+                <button onclick="editTodo(${todo._id})">Edit</button>
+                `
+            })
+            document.getElementById('list').innerHTML = list.join('')
+            // console.log(todos);
             
         }
 
