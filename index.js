@@ -74,8 +74,13 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify(todo))
       })
   }
-
-
+  else if(path == '/update_todo'){
+    console.log(query);
+    Todo.findByIdAndUpdate(query.id, {task: query.task}).then((todo) => {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(todo))
+      })
+  }
 });
 
 server.listen(3500, () => {
