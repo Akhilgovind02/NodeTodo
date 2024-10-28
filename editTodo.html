@@ -8,12 +8,13 @@
 <body>
     <form action="" id="form-todo">
         <input id="input"  type="text">
-        <button>Edit</button>
+        <button id="edit">Edit</button>
     </form>
 
 
     <script>
         const input = document.getElementById('input');
+        const edit = document.getElementById('edit')
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
         console.log('ID:', id);
@@ -29,9 +30,9 @@
         }
         getTodoById()
 
-        form.addEventListener('submit', async(e)=>{
+        edit.addEventListener('click', async(e)=>{
             e.preventDefault()
-            let data = await fetch(`http://localhost:3500/update_todo?id=${id.toString()}&task=${input.value}`)
+            let data1 = await fetch(`http://localhost:3500/update_todo?id=${id.toString()}&ctask=${input.value}`)
             // let todo = await data.json()
             // console.log(todo)
         })

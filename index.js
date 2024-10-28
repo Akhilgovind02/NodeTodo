@@ -67,19 +67,20 @@ const server = http.createServer((req, res) => {
     })
   }
 
-  else if('get_todo_by_id'){
-    console.log(query)
+  else if(path == '/get_todo_by_id' && !query.ctask){
     Todo.findById(query.id).then((todo) => {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(todo))
       })
   }
-  else if(path == '/update_todo'){
+  else if(path == '/update_todo' && query.ctask && query.id){
     console.log(query);
-    Todo.findByIdAndUpdate(query.id, {task: query.task}).then((todo) => {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(todo))
-      })
+    async function updateTodo() {
+      let data = await Todo.findById(query.id);
+      data.task = query.ctask;
+      data.save();
+    }
+    updateTodo()
   }
 });
 
